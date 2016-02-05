@@ -54,3 +54,5 @@ end
 
 ruby '2.3.0'
 
+gem 'bcrypt', '~> 3.1.7'
+
