@@ -9,6 +9,12 @@
   has made <%= @user.ratings.size %> ratings, average <%= @user.average_rating %>
   <br>
   member of <% @user.beer_clubs.each do |bc| %> <%= link_to bc.name, beer_club_path(bc) %> <% end %>
+  <br>
+  favorite beer: <%= @user.favorite_beer %>
+  <br>
+  favorite style: <%= @user.favorite_style %>
+  <br>
+  favorite brewery: <%= @user.favorite_brewery %>
 </p>
 
 <p><strong>ratings</strong></p>

@@ -55,4 +55,16 @@ end
 ruby '2.3.0'
 
 gem 'bcrypt', '~> 3.1.7'
+gem 'rspec-its'
+
+group :development, :test do
+  gem 'rspec-rails', '~> 3.0'
+end
+
+group :test do
+  gem 'factory_girl_rails'
+  gem 'capybara'
+  gem 'launchy'
+  gem 'simplecov', require: false
+end
 
