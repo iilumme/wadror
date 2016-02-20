@@ -17,46 +17,35 @@ class User < ActiveRecord::Base
   def favorite_style
     return nil if ratings.empty?
 
-    styles = Hash.new
-
-    ratings.each do |r|
-      if styles.has_key?(r.beer.style) == false
-        styles[r.beer.style] = Array.new
-      end
-      array = styles[r.beer.style]
-      array << r.score
-    end
-
-    averages = Hash.new
-
-    styles.each_pair do |p|
-      averages[p[0]] = p[1].sum / p[1].size.to_f
-    end
-
-    averages.max { |a, b| a[1] <=> b[1]}[0]
-
+    rated = ratings.map{ |r| r.beer.style }.uniq
+    rated.sort_by { |style| -rating_of_style(style) }.first
   end
 
   def favorite_brewery
     return nil if ratings.empty?
 
-    brewerys = Hash.new
-
-    ratings.each do |r|
-      if brewerys.has_key?(r.beer.brewery.name) == false
-        brewerys[r.beer.brewery.name] = Array.new
-      end
-      array = brewerys[r.beer.brewery.name]
-      array << r.score
-    end
-
-    averages = Hash.new
-
-    brewerys.each_pair do |p|
-      averages[p[0]] = p[1].sum / p[1].size.to_f
-    end
-
-    averages.max { |a, b| a[1] <=> b[1]}[0]
-
+    rated = ratings.map{ |r| r.beer.brewery }.uniq
+    rated.sort_by { |brewery| -rating_of_brewery(brewery) }.first
   end
+
+  private
+
+  def rating_of_style(style)
+    ratings_of = ratings.select{ |r| r.beer.style==style }
+    ratings_of.map(&:score).inject(&:+) / ratings_of.count.to_f
+  end
+
+  def rating_of_brewery(brewery)
+    ratings_of = ratings.select{ |r| r.beer.brewery==brewery }
+    ratings_of.map(&:score).inject(&:+) / ratings_of.count.to_f
+  end
+
 end
+
+
+
+
+
+
+
+

@@ -103,7 +103,7 @@ RSpec.describe User, type: :model do
     end
     it "is the only brewery if only one rating" do
       beer = create_beer_with_rating(user, 10)
-      expect(user.favorite_brewery).to eq(beer.brewery.name)
+      expect(user.favorite_brewery).to eq(beer.brewery)
     end
   end
 

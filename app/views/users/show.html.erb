@@ -6,15 +6,25 @@
 </p>
 
 <p>
-  has made <%= @user.ratings.size %> ratings, average <%= @user.average_rating %>
+  Has made <%= @user.ratings.size %> ratings, average <%= @user.average_rating %>
   <br>
-  member of <% @user.beer_clubs.each do |bc| %> <%= link_to bc.name, beer_club_path(bc) %> <% end %>
-  <br>
-  favorite beer: <%= @user.favorite_beer %>
-  <br>
-  favorite style: <%= @user.favorite_style %>
-  <br>
-  favorite brewery: <%= @user.favorite_brewery %>
+  <% if @user.beer_clubs.any? %>
+    <p>
+      Member of
+      <% @user.beer_clubs.each do |club| %>
+          <%= link_to club.name, club %>
+      <% end %>
+    </p>
+<% else %>
+    <p>No club memberships</p>
+<% end %>
+  <% if @user.ratings.any? %>
+    <p>Favorite beer: <%= @user.favorite_beer %></p>
+
+    <p>Favorite style: <%= @user.favorite_style %></p>
+
+    <p>Favorite brewery: <%= @user.favorite_brewery.name %></p>
+<% end %>
 </p>
 
 <p><strong>ratings</strong></p>
@@ -32,6 +42,5 @@
 
 <% if @user == current_user %>
     <%= link_to 'Edit', edit_user_path(@user) %> |
-    <%= link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure?' } %> |
+    <%= link_to 'Delete account', @user, method: :delete, data: { confirm: 'Are you sure?' } %>
 <% end %>
-<%= link_to 'Back', users_path %>
