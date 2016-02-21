@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ab5300c6-309f-4931-9f3b-d61e7786dbe0" name="Default" comment="" />
+    <list default="true" id="ab5300c6-309f-4931-9f3b-d61e7786dbe0" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20160221094534_create_styles.rb" afterPath="$PROJECT_DIR$/db/migrate/20160221094534_create_styles.rb" />
+    </list>
     <ignored path="ratebeer.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/.bundle/" />
@@ -54,8 +56,8 @@
       <file leaf-file-name="20160221094534_create_styles.rb" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/db/migrate/20160221094534_create_styles.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.07281554">
-              <caret line="3" column="25" selection-start-line="3" selection-start-column="25" selection-end-line="3" selection-end-column="25" />
+            <state vertical-scroll-proportion="0.097087376">
+              <caret line="4" column="30" selection-start-line="4" selection-start-column="30" selection-end-line="4" selection-end-column="30" />
               <folding />
             </state>
           </provider>
@@ -1156,8 +1158,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/db/migrate/20160221094534_create_styles.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.07281554">
-          <caret line="3" column="25" selection-start-line="3" selection-start-column="25" selection-end-line="3" selection-end-column="25" />
+        <state vertical-scroll-proportion="0.097087376">
+          <caret line="4" column="30" selection-start-line="4" selection-start-column="30" selection-end-line="4" selection-end-column="30" />
           <folding />
         </state>
       </provider>
