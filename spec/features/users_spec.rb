@@ -37,20 +37,23 @@ describe "User" do
     before :each do
 
       @brewery = FactoryGirl.create :brewery, name:"Hesan brewery"
+      style1 = FactoryGirl.create :style, name:"Lager"
+      style2 = FactoryGirl.create :style, name:"IPA"
+      style3 = FactoryGirl.create :style, name:"Stout"
       other_brewery = FactoryGirl.create :brewery
-      create_beers_with_ratings(user, "lager", other_brewery, 10, 20, 15)
-      create_beers_with_ratings(user, "IPA", @brewery, 25, 20)
-      create_beers_with_ratings(user, "stout", other_brewery, 20, 23, 22)
+      create_beers_with_ratings(user, style1, other_brewery, 10, 20, 15)
+      create_beers_with_ratings(user, style2, @brewery, 25, 20)
+      create_beers_with_ratings(user, style3, other_brewery, 20, 23, 22)
 
       visit user_path(user)
     end
 
     it "the favorite style is shown at user's page" do
-      expect(page).to have_content 'Favorite style IPA'
+      expect(page).to have_content 'Favorite style: IPA'
     end
 
     it "the favorite brewery is shown at user's page" do
-      expect(page).to have_content 'Favorite brewery Hesan brewery'
+      expect(page).to have_content 'Favorite brewery: Hesan brewery'
     end
 
     it "sees own ratings" do

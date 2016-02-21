@@ -13,6 +13,10 @@ describe "Beer" do
     @breweries.each do |brewery_name|
       FactoryGirl.create(:brewery, name: brewery_name)
     end
+    @styles = ["IPA", "Lager"]
+    @styles.each do |s|
+      FactoryGirl.create(:style, name: s)
+    end
 
   end
 
@@ -20,6 +24,7 @@ describe "Beer" do
     visit new_beer_path
     fill_in('beer_name', with:'i')
     select('Koff', from:'beer_brewery_id')
+    select('IPA', from:'beer_style_id')
 
     expect{
       click_button('Create Beer')

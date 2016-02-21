@@ -1,6 +1,8 @@
 language: ruby
 rvm:
 - 2.3.0
+env:
+- APIKEY="20808d88a8662cb38a3b08e4a729a404"
 script:
 - bundle exec rake db:migrate --trace
 - RAILS_ENV=test bundle exec rake db:migrate --trace

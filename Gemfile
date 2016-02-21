@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+ruby '2.3.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'
@@ -21,6 +22,13 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
+
+
+gem 'bcrypt', '~> 3.1.7'
+gem 'rspec-its'
+gem 'httparty'
+
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -30,10 +38,6 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug'
-end
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
@@ -44,7 +48,16 @@ group :development do
 end
 
 group :development, :test do
+  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'byebug'
+end
+
+group :development, :test do
   gem 'sqlite3'
+end
+
+group :development, :test do
+  gem 'rspec-rails', '~> 3.0'
 end
 
 group :production do
@@ -52,19 +65,10 @@ group :production do
   gem 'rails_12factor'
 end
 
-ruby '2.3.0'
-
-gem 'bcrypt', '~> 3.1.7'
-gem 'rspec-its'
-
-group :development, :test do
-  gem 'rspec-rails', '~> 3.0'
-end
-
 group :test do
   gem 'factory_girl_rails'
   gem 'capybara'
   gem 'launchy'
   gem 'simplecov', require: false
+  gem 'webmock'
 end
-
