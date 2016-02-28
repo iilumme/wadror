@@ -29,9 +29,9 @@
   <% @top_users.each do |u| %>
       <tr>
         <td><%= link_to u.username, user_path(u) %></td>
-        <td><%= u.favorite_beer %></td>
-        <td><%= u.favorite_style.name %></td>
-        <td><%= u.favorite_brewery.name %></td>
+        <td><%= u.favorite_beer if !u.favorite_beer.nil? %></td>
+        <td><%= u.favorite_style.name if !u.favorite_style.nil? %></td>
+        <td><%= u.favorite_brewery.name if !u.favorite_brewery.nil? %></td>
         <td><%= u.ratings.count %></td>
       </tr>
   <% end %>
