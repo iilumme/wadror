@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+
 
 <p>
   <strong><h2><%= @style.name %></h2></strong>
@@ -20,7 +20,4 @@
 <% end %>
 
 
-
-
-<%= link_to 'Edit', edit_style_path(@style) %> |
-<%= link_to 'Destroy', @style, method: :delete, data: { confirm: 'Are you sure?' } %>
+<%= edit_and_destroy_buttons(@style) %>

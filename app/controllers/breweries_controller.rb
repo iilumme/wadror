@@ -1,11 +1,13 @@
 class BreweriesController < ApplicationController
   before_action :set_brewery, only: [:show, :edit, :update, :destroy]
   before_action :ensure_that_signed_in, except: [:index, :show]
+  before_action :ensure_that_admin, only: [:destroy]
 
   # GET /breweries
   # GET /breweries.json
   def index
-    @breweries = Brewery.all
+    @active_breweries = Brewery.active
+    @retired_breweries = Brewery.retired
   end
 
   # GET /breweries/1
@@ -62,16 +64,16 @@ class BreweriesController < ApplicationController
     end
   end
 
-  private
+  def toggle_activity
+    brewery = Brewery.find(params[:id])
+    brewery.update_attribute :active, (not brewery.active)
 
-  # def authenticate
-  #
-  #   admin_accounts = {"admin" => "secret", "pekka" => "beer", "arto" => "foobar", "matti" => "ittam"}
-  #
-  #   authenticate_or_request_with_http_basic do |username, password|
-  #     admin_accounts[username] == password
-  #   end
-  # end
+    new_status = brewery.active? ? "active" : "retired"
+
+    redirect_to :back, notice:"brewery activity status changed to #{new_status}"
+  end
+
+  private
 
   # Use callbacks to share common setup or constraints between actions.
   def set_brewery
@@ -80,6 +82,6 @@ class BreweriesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def brewery_params
-    params.require(:brewery).permit(:name, :year)
+    params.require(:brewery).permit(:name, :year, :active)
   end
 end

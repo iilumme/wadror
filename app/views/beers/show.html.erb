@@ -1,8 +1,7 @@
-<p id="notice"><%= notice %></p>
+
 
 <p>
-  <strong>Name:</strong>
-  <%= @beer.name %>
+  <strong><h2><%= @beer.name %></h2></strong>
 </p>
 
 <p>
@@ -19,23 +18,22 @@
 <% if @beer.ratings.empty? %>
     <p>Has not yet been rated!</p>
 <% else %>
-    <p>Has <%= pluralize(@beer.ratings.size, "rating", "ratings") %>, average <%= @beer.average_rating %></p>
+    <p>Has <%= pluralize(@beer.ratings.size, "rating", "ratings") %>, average <%= round(@beer.average_rating) %></p>
 <% end %>
 
+<br>
 
 <% if current_user %>
 
-    <h4>give a rating:</h4>
+    <h5>give a rating:</h5>
 
     <%= form_for(@rating) do |f| %>
-        <%= f.hidden_field :beer_id %>
         score: <%= f.number_field :score %>
-        <%= f.submit %>
+        <%= f.submit class:"btn btn-primary" %>
     <% end %>
 
     <br>
 
-    <%= link_to 'Edit', edit_beer_path(@beer) %>
-    <%= link_to 'Destroy', @beer, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <%= edit_and_destroy_buttons(@beer) %>
 
 <% end %>

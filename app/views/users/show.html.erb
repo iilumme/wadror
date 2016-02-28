@@ -1,12 +1,18 @@
-<p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Username:</strong>
-  <%= @user.username %>
+  <strong><h2><%= @user.username %></h2></strong>
+  <% if @user.iced %>
+      <span class="label label-info">account frozen</span>
+      <% if !current_user.nil? && current_user.admin %>
+          <%= link_to "reactivate account", toggle_iced_user_path(@user.id), method: :post, class: "btn btn-danger" %>
+      <% end %>
+  <% elsif !@user.iced && !current_user.nil? && current_user.admin && @user.admin == false %>
+      <%= link_to "froze account", toggle_iced_user_path(@user.id), method: :post, class: "btn btn-danger" %>
+  <% end %>
 </p>
 
 <p>
-  Has made <%= @user.ratings.size %> ratings, average <%= @user.average_rating %>
+  Has made <%= @user.ratings.size %> ratings, average <%= round(@user.average_rating) %>
   <br>
   <% if @user.beer_clubs.any? %>
     <p>
@@ -41,6 +47,6 @@
 </ul>
 
 <% if @user == current_user %>
-    <%= link_to 'Edit', edit_user_path(@user) %> |
-    <%= link_to 'Delete account', @user, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <%= link_to 'Edit', edit_user_path(@user), class:'btn btn-primary' %>
+    <%= link_to 'Delete account', @user, method: :delete, data: { confirm: 'Are you sure?' }, class:'btn btn-danger' %>
 <% end %>

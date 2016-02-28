@@ -15,10 +15,14 @@ Rails.application.routes.draw do
   get 'places', to: 'places#index'
   post 'places', to:'places#search'
 
+  resources :breweries do
+    post 'toggle_activity', on: :member
+  end
 
-  # get 'ratings', to: 'ratings#index'
-  # get 'ratings/new', to:'ratings#new'
-  # post 'ratings', to: 'ratings#create'
+  resources :users do
+    post 'toggle_iced', on: :member
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

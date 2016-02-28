@@ -72,3 +72,9 @@ group :test do
   gem 'simplecov', require: false
   gem 'webmock'
 end
+
+
+gem 'bootstrap-sass'
+group :development do
+  gem 'rails_layout'
+end

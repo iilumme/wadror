@@ -25,6 +25,7 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
+    @user.admin = false
 
     respond_to do |format|
       if @user.save
@@ -64,6 +65,13 @@ class UsersController < ApplicationController
       format.json { head :no_content }
 
     end
+  end
+
+  def toggle_iced
+    user = User.find(params[:id])
+    user.update_attribute :iced, (not user.iced)
+
+    redirect_to :back, notice:"user account status changed"
   end
 
   private

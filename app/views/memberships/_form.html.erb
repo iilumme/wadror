@@ -11,6 +11,7 @@
         </div>
     <% end %>
 
+    <% if @beer_clubs.any? %>
     <div class="field">
       <%= f.select :beer_club_id, options_from_collection_for_select(@beer_clubs, :id, :name) %>
     </div>
@@ -18,4 +19,7 @@
     <div class="actions">
       <%= f.submit %>
     </div>
+    <% else %>
+    <p>You have already memberships in all of the beer clubs</p>
+    <% end %>
 <% end %>

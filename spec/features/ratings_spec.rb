@@ -34,7 +34,6 @@ describe "Rating" do
     @ratings <<  FactoryGirl.create(:rating, score:5, beer:beer2, user:user)
     visit ratings_path
 
-    expect(page).to have_content "Number of ratings: #{@ratings.count}"
     @ratings.each do |rating|
       expect(page).to have_content rating.score
     end
@@ -51,7 +50,6 @@ describe "Rating" do
 
     it "those and their count are shown at the ratings page" do
       visit ratings_path
-      expect(page).to have_content "Number of ratings: #{@ratings.count}"
       @ratings.each do |rating|
         expect(page).to have_content rating.score
         expect(page).to have_content rating.beer.name
