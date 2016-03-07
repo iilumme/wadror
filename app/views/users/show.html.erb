@@ -11,37 +11,48 @@
   <% end %>
 </p>
 
-<p>
-  Has made <%= @user.ratings.size %> ratings, average <%= round(@user.average_rating) %>
-  <br>
-  <% if @user.beer_clubs.any? %>
-    <p>
-      Member of
-      <% @user.beer_clubs.each do |club| %>
-          <%= link_to club.name, club %>
-      <% end %>
-    </p>
+<% if @user.ratings.any? %>
+    <dl class="dl-horizontal">
+      <dt>favorite beer<dt>
+      <dd><%= @user.favorite_beer %></dd>
+      <dt>preferred style<dt>
+      <dd><%= @user.favorite_style.name %></dd>
+      <dt>favorite brewery<dt>
+      <dd><%= @user.favorite_brewery.name %></dd>
+    </dl>
+<% end %>
+
+
+<h4><strong>Memberships</strong></h4>
+<% if @user.beer_clubs.any? %>
+    <p>Member of</p>
+      <ul>
+        <% @user.beer_clubs.each do |club| %>
+            <li><%= link_to club.name, club %></li>
+        <% end %>
+      </ul>
 <% else %>
     <p>No club memberships</p>
 <% end %>
-  <% if @user.ratings.any? %>
-    <p>Favorite beer: <%= @user.favorite_beer %></p>
-
-    <p>Favorite style: <%= @user.favorite_style.name %></p>
-
-    <p>Favorite brewery: <%= @user.favorite_brewery.name %></p>
+<% if @user.applications.any? %>
+    <p>Applied membership of</p>
+    <ul>
+      <% @user.applications.each do |club| %>
+          <li><%= link_to club.name, club %></li>
+      <% end %>
+    </ul>
 <% end %>
-</p>
 
-<p><strong>ratings</strong></p>
 
+<h4><strong>Ratings</strong></h4>
+<p>Has made <%= @user.ratings.size %> ratings, average <%= round(@user.average_rating) %></p>
 <ul>
   <% @user.ratings.each do |rating| %>
       <li>
         <%= rating.to_s %>
         <% if @user == current_user %>
-        <%= link_to 'delete', rating, method: :delete, data: { confirm: 'Are you sure?' } %>
-            <% end %>
+            <%= link_to '', rating, method: :delete, data: { confirm: 'Are you sure?' }, class:'glyphicon glyphicon-trash' %>
+        <% end %>
       </li>
   <% end %>
 </ul>

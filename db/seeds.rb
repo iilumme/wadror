@@ -8,10 +8,14 @@ l3 = Style.create name:"Porter"
 l4 = Style.create name:"Weizen"
 l5 = Style.create name:"IPA"
 
-b1.beers.create name:"Iso 3", style_id:1
-b1.beers.create name:"Karhu", style_id:1
-b1.beers.create name:"Tuplahumala", style_id:1
-b2.beers.create name:"Huvila Pale Ale", style_id:2
-b2.beers.create name:"X Porter", style_id:3
-b3.beers.create name:"Hefeweizen", style_id:4
-b3.beers.create name:"Helles", style_id:1
+b1.beers.create name:"Iso 3", style:l1
+b1.beers.create name:"Karhu", style:l1
+b1.beers.create name:"Tuplahumala", style:l1
+b2.beers.create name:"Huvila Pale Ale", style:l2
+b2.beers.create name:"X Porter", style:l3
+b3.beers.create name:"Hefeweizen", style:l4
+b3.beers.create name:"Helles", style:l1
+
+User.create username:"admin", password:"Admin1", password_confirmation:"Admin1"
+User.create username:"ibbuii", password:"123Q", password_confirmation:"123Q"
+User.create username:"hei", password:"123Q", password_confirmation:"123Q"

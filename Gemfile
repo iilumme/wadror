@@ -27,6 +27,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'bcrypt', '~> 3.1.7'
 gem 'rspec-its'
 gem 'httparty'
+gem 'jquery-turbolinks'
+#gem 'rack-mini-profiler'
+gem 'omniauth-github'
 
 
 # Use ActiveModel has_secure_password
@@ -71,6 +74,8 @@ group :test do
   gem 'launchy'
   gem 'simplecov', require: false
   gem 'webmock'
+  gem 'selenium-webdriver'
+  gem 'database_cleaner'
 end
 
 

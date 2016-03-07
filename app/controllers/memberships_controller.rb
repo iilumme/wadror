@@ -29,8 +29,9 @@ class MembershipsController < ApplicationController
     club = BeerClub.find membership_params[:beer_club_id]
     if not current_user.in? club.members and @membership.save
       current_user.memberships << @membership
+      @membership.confirmed = false
       @membership.save
-      redirect_to beer_club_path(membership_params[:beer_club_id]), notice: "#{current_user.username}, welcome to the club #{@membership.beer_club.name}!"
+      redirect_to beer_club_path(membership_params[:beer_club_id]), notice: "#{current_user.username}, your application to the club #{@membership.beer_club.name} has been sent!"
     else
       @clubs = BeerClub.all
       render :new
@@ -60,6 +61,13 @@ class MembershipsController < ApplicationController
       format.html { redirect_to user_path(current_user), notice: "Membership in #{bc.name} beerclub ended." }
       format.json { head :no_content }
     end
+  end
+
+  def toggle_confirmed
+    membership = Membership.find(params[:id])
+    membership.update_attribute :confirmed, (not membership.confirmed)
+
+    redirect_to :back
   end
 
   private

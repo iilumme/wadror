@@ -13,3 +13,74 @@
  *= require_tree .
  *= require_self
  */
+
+#main_container {
+  padding: 0%;
+}
+
+#the_row {
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-bottom: 2em;
+  background: url(https://raw.githubusercontent.com/hudsonmarinho/header-and-footer-parallax-effect/master/assets/images/bg-header.jpg) no-repeat 50% 50%;
+}
+
+#welcome {
+  margin: 4em;
+  padding: 2em;
+
+  .text {
+
+    padding-top: 3em;
+    padding-bottom: 3em;
+    background-color: rgba(0,0,0,.30);
+
+
+    h1 {
+      color: white;
+      text-align: center;
+      font-family: Futura;
+
+    }
+
+  }
+
+  $cubic-bezier-numbers: .99,.16,.79,.67;
+  $drop_time: 3s;
+
+  .drop {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-bottom: 40px solid #ddaa00;
+    border-bottom-left-radius: 100%;
+    border-bottom-right-radius: 100%;
+    top: -80px;
+    margin: 0 auto;
+    -moz-animation-name: drip;
+    -webkit-animation-name: drip;
+    animation-name: drip;
+    -moz-animation-timing-function: cubic-bezier($cubic-bezier-numbers);
+    -webkit-animation-timing-function: cubic-bezier($cubic-bezier-numbers);
+    animation-timing-function: cubic-bezier($cubic-bezier-numbers);
+    -moz-animation-duration: $drop_time;
+    -webkit-animation-duration: $drop_time;
+    animation-duration: $drop_time;
+    -moz-animation-iteration-count: infinite;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+  }
+
+
+  @keyframes drip {
+    to {
+      top: 290px;
+      border-bottom-color:transparent;
+
+    }
+  }
+
+
+}

@@ -2,10 +2,12 @@ class User < ActiveRecord::Base
   include RatingAverage
   has_many :ratings, dependent: :destroy
   has_many :beers, through: :ratings
-  has_many :memberships, dependent: :destroy
+  has_many :memberships, -> {where confirmed: true}, dependent: :destroy
+  has_many :unconfirmed_memberships, -> {where confirmed: false}, class_name: "Membership", dependent: :destroy
   has_many :beer_clubs, through: :memberships
-  validates :username, length: { minimum: 3, maximum: 15 }, uniqueness: true
-  validates :password, length: {minimum: 4}, format: {with: /(?=.*\d)(?=.*([A-Z]))/, message: "has to contain one number and one upper case letter"}
+  has_many :applications, through: :unconfirmed_memberships, source: :beer_club
+  validates :username, length: { minimum: 3, maximum: 30 }, uniqueness: true
+  validates :password, length: {minimum: 4}, format: {with: /\d.*[A-Z]|[A-Z].*\d/, message: "has to contain one number and one upper case letter"}
 
   has_secure_password
 
@@ -29,6 +31,15 @@ class User < ActiveRecord::Base
     rated.sort_by { |item| -rating_of(category, item) }.first
   end
 
+  def find_membership(beer_club_id)
+    memberships.find_by beer_club_id: beer_club_id, user_id: self.id
+  end
+
+  def self.top(n)
+    sorted_by_rating_in_desc_order = User.all.sort_by{ |u| -(u.ratings.count||0) }
+    sorted_by_rating_in_desc_order.take(n)
+  end
+
   private
 
   def rating_of(category, item)
@@ -36,10 +47,6 @@ class User < ActiveRecord::Base
     ratings_of.map(&:score).inject(&:+) / ratings_of.count.to_f
   end
 
-  def self.top(n)
-    sorted_by_rating_in_desc_order = User.all.sort_by{ |u| -(u.ratings.count||0) }
-    sorted_by_rating_in_desc_order.take(n)
-  end
 
 end
 

@@ -49,11 +49,11 @@ describe "User" do
     end
 
     it "the favorite style is shown at user's page" do
-      expect(page).to have_content 'Favorite style: IPA'
+      expect(page).to have_content 'preferred style IPA'
     end
 
     it "the favorite brewery is shown at user's page" do
-      expect(page).to have_content 'Favorite brewery: Hesan brewery'
+      expect(page).to have_content 'favorite brewery Hesan brewery'
     end
 
     it "sees own ratings" do

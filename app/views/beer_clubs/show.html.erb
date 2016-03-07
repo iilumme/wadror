@@ -1,5 +1,3 @@
-
-
 <p>
 <h2><%= @beer_club.name %> <%= @beer_club.city %></h2>
 </p>
@@ -19,7 +17,18 @@
     <p>There are no members</p>
 <% end %>
 
-<% if not current_user.in?(@beer_club.members) || current_user.nil?  %>
+<% if @beer_club.unconfirmed.any? %>
+    <p><strong>Applications</strong></p>
+    <ul>
+      <% @beer_club.unconfirmed.each do |user| %>
+          <li><%= link_to user.username, user_path(user) %> <%= link_to "Confirm", toggle_confirmed_membership_path(user.find_membership(@beer_club.id)), method: :post, class: "btn btn-primary" if current_user.in?(@beer_club.members) %> </li>
+      <% end %>
+    </ul>
+<% else %>
+    <p>There are no applications</p>
+<% end %>
+
+<% if not current_user.in?(@beer_club.members) || current_user.in?(@beer_club.unconfirmed) || current_user.nil?  %>
     <%= form_for(@membership) do |f| %>
         <%= f.hidden_field :beer_club_id %>
         <%= f.submit class:'btn btn-primary', value:"join the club" %>

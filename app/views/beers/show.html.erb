@@ -1,5 +1,5 @@
 
-
+<% cache @beer do %>
 <p>
   <strong><h2><%= @beer.name %></h2></strong>
 </p>
@@ -23,11 +23,14 @@
 
 <br>
 
+<% end %>
+
 <% if current_user %>
 
     <h5>give a rating:</h5>
 
     <%= form_for(@rating) do |f| %>
+        <%= f.hidden_field :beer_id %>
         score: <%= f.number_field :score %>
         <%= f.submit class:"btn btn-primary" %>
     <% end %>

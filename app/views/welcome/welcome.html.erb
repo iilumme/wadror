@@ -1,0 +1,39 @@
+<script>
+  $(document).ready(function () {
+    var welcome = $('#welcome');
+
+    for (i = 0; i < 40; i++) {
+
+      var div = document.createElement('div');
+      div.className = "drop";
+      div.style.left = randomIntFromInterval(0, 100) + "%";
+      div.style.animationDelay = randomIntFromInterval(-3, 4) + "s";
+      div.style.animationDuration = randomIntFromInterval(5, 6) + "s";
+
+      if (i < 15) {
+        div.style.borderLeftWidth = "10px";
+        div.style.borderRightWidth = "10px";
+        div.style.borderBottomWidth = "30px";
+      } else if (i < 25 && i > 14) {
+        div.style.borderLeftWidth = "5px";
+        div.style.borderRightWidth = "5px";
+        div.style.borderBottomWidth = "20px";
+      }
+
+      welcome.append(div);
+    }
+
+    function randomIntFromInterval(min,max)
+    {
+      return Math.floor(Math.random()*(max-min+1)+min);
+    }
+
+  });
+</script>
+
+<div id="welcome">
+  <div class="drop"></div>
+  <div class="text">
+    <h1>Welcome to Ratebeer!</h1>
+    </div>
+</div>
